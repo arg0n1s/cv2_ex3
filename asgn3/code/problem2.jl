@@ -13,15 +13,13 @@ end
 
 function mask_image(img::Array{Float64, 2}, value::Float64, ratio::Float64)
   masked_img = copy(img)
-  mask = BitArray(size(masked_img))
+  mask = BitArray(size(masked_img)).*false
   indices = range(1,length(img))
   indices = shuffle(indices)[1:convert(Int64,size(indices,1)*ratio)]
   for i in indices
     masked_img[i]=value
     mask[i]=true
   end
-  #masked_img = reshape(masked_img, size(img))
-  #mask = reshape(mask, size(img))
 
   return masked_img::Array{Float64, 2}, mask::BitArray{2}
 end
